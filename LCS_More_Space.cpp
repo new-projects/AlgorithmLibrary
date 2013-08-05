@@ -28,7 +28,7 @@ int Lcs(int m, int n, const Key* a, const Key* b, Key* res) {
     for (int i = 0; i < m; i++)
         bit[a[i]][i >> SHIFT_LEN] |= static_cast<T>(1) << (i & (W_LEN - 1));
 
-    memset(mat[0], 0, nbits * sizeof(T));
+    fill(mat[0], mat[0] + nbits, 0);
     T top_bit, t, carry, x, y, *bit_s, *old, *dp;
     for (int i = 0; i < n; ++i) {
         top_bit = 1; bit_s = bit[b[i]];
