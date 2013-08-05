@@ -27,7 +27,7 @@ void LcsBit(int m, int n, const Key* a, const Key* b, int* res) {
     for (int i = 0; i < m; i++)
         bit[a[i]][i >> SHIFT_LEN] |= static_cast<T>(1) << (i & (W_LEN - 1));
     
-    memset(dp, 0, nbits * sizeof(T));
+    fill(dp, dp + nbits, 0);
     T top_bit, t, carry, x, y, *bit_s;
     for (int i = 0; i < n; i++) {
         top_bit = 1; bit_s = bit[b[i]];
@@ -67,10 +67,8 @@ int Lcs(int m, int n, const Key* a, const Key* b, Key* c) {
     static Key ra[MAX_N], rb[MAX_N];
     static int res1[MAX_N], res2[MAX_N];
     int i = (m - 1) >> 1;
-    memcpy(ra, a, m * sizeof(Key));
-    memcpy(rb, b, n * sizeof(Key));
-    reverse(ra, ra + m);
-    reverse(rb, rb + n);
+    reverse_copy(a, a + m, ra);
+    reverse_copy(b, b + n, rb);
     LcsBit(n, i + 1, b, a, res1);
     LcsBit(n, m - i - 1, rb, ra, res2);
 
@@ -84,7 +82,7 @@ int Lcs(int m, int n, const Key* a, const Key* b, Key* c) {
 
     if (len1 > 0) Lcs(i + 1, k + 1, a, b, c);
     if (len2 > 0) Lcs(m - i - 1, n - k - 1, a + i + 1, b + k + 1, c + k + 1);
-    memmove(c + len1, c + k + 1, len2 * sizeof(Key));
+    copy(c + k + 1, c + k + 1 + len2, c + len1);
     return len1 + len2;
 }
 
