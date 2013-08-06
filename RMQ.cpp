@@ -1,3 +1,5 @@
+// Tested by POJ2823
+
 #include <cstdio>
 #include <cstring>
 #include <algorithm>
@@ -5,11 +7,11 @@
 #include <iostream>
 using namespace std;
 
-typedef int T;
-const int MAX_N = 1000000 + 10;
-const int SEG_LEN = 16;
+typedef int T;                      // [USER]
+const int MAX_N = 1000000 + 10;     // [USER]
+const int SEG_LEN = 16;             // [USER]
 const int MAX_M = MAX_N / SEG_LEN + 2;
-const int MAX_K = 18; // MAX_K = log(MAX_M)
+const int MAX_K = 18; // MAX_K = log(MAX_M) // [USER]
 
 int d[MAX_K][MAX_M];
 int int_log[MAX_M];
